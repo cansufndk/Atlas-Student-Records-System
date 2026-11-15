@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Atlas | Student Records</title>
+
+    <style>
+      :root {
+        --purple: #7456e8;
+        --purple-light: #f0edff;
+        --background: #f7f8fc;
+        --text: #22243a;
+        --muted: #9296aa;
+        --border: #e9eaf2;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: var(--background);
+        color: var(--text);
+      }
+
+      .app {
+        display: flex;
+        min-height: 100vh;
+      }
+
+      /* Sidebar */
+      .sidebar {
+        width: 245px;
+        background: white;
+        border-right: 1px solid var(--border);
+        padding: 30px 18px;
+        flex-shrink: 0;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 0 12px;
+        margin-bottom: 55px;
+        font-size: 23px;
+        font-weight: 800;
+      }
+
+      .brand-icon {
+        background: var(--purple);
+        color: white;
+        width: 42px;
+        height: 42px;
+        border-radius: 13px;
+        display: grid;
+        place-items: center;
+      }
+
+      .nav-label {
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        margin: 0 12px 18px;
+      }
+
+      .nav-item {
+        display: block;
+        padding: 15px;
+        border-radius: 12px;
+        color: #74788e;
+        font-size: 14px;
+        margin-bottom: 7px;
+        font-weight: 600;
+      }
+
+      .nav-item.active {
+        background: var(--purple-light);
+        color: var(--purple);
+      }
+
+      .sidebar-note {
+        margin-top: 65px;
+        padding: 18px;
+        border-radius: 14px;
+        background: #f5f3ff;
+        font-size: 12px;
+        color: #77738d;
+        line-height: 1.7;
+      }
+
+      /* Main content */
+      .main {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .topbar {
+        background: white;
+        border-bottom: 1px solid var(--border);
+        padding: 20px 36px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .topbar strong {
+        font-size: 16px;
+      }
+
+      .avatar {
+        background: var(--purple-light);
+        color: var(--purple);
+        width: 39px;
+        height: 39px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+      }
+
+      .content {
+        max-width: 1350px;
+        margin: auto;
+        padding: 35px;
+      }
+
+      .welcome {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 28px;
+      }
+
+      .welcome h1 {
+        margin: 0 0 8px;
+        font-size: 29px;
+        letter-spacing: -1px;
+      }
+
+      .welcome p {
+        color: var(--muted);
+        margin: 0;
+        font-size: 14px;
+      }
+
+      .badge {
+        background: #e9f9ef;
+        color: #24945c;
+        border-radius: 30px;
+        padding: 9px 14px;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      /* Statistics */
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-bottom: 26px;
+      }
+
+      .stat-card {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 25px;
+        box-shadow: 0 5px 25px #27315b05;
+      }
+
+      .stat-icon {
+        width: 46px;
+        height: 46px;
+        border-radius: 13px;
+        display: grid;
+        place-items: center;
+        font-size: 22px;
+        margin-bottom: 22px;
+      }
+
+      .lavender {
+        background: #eeeaff;
+      }
+
+      .peach {
+        background: #fff0e4;
+      }
+
+      .mint {
+        background: #e3f9f2;
+      }
+
+      .stat-card p {
+        color: var(--muted);
+        font-size: 13px;
+        margin: 0 0 10px;
+      }
+
+      .stat-card h2 {
+        font-size: 31px;
+        margin: 0;
+      }
+
+      /* Panels */
+      .panel {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 27px;
+        margin-bottom: 25px;
+        box-shadow: 0 5px 25px #27315b05;
+      }
+
+      .panel-heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 23px;
+      }
+
+      .panel-heading h2 {
+        font-size: 18px;
+        margin: 0;
+      }
+
+      .panel-heading span {
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 19px;
+      }
+
+      label {
+        display: block;
+        font-size: 12px;
+        font-weight: 700;
+        margin-bottom: 9px;
+        color: #61657a;
+      }
+
+      input {
+        width: 100%;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 13px 14px;
+        font-size: 14px;
+        background: #fcfcff;
+        color: var(--text);
+        outline: none;
+      }
+
+      input:focus {
+        border-color: var(--purple);
+        box-shadow: 0 0 0 3px #7456e81a;
+      }
+
+      input:disabled {
+        background: #f2f2f7;
+      }
+
+      button {
+        cursor: pointer;
+        border: none;
+        border-radius: 10px;
+        padding: 12px 19px;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .primary {
+        background: var(--purple);
+        color: white;
+      }
+
+      .primary:hover {
+        background: #6042d4;
+      }
+
+      .secondary {
+        background: #f0f1f7;
+        color: #61657a;
+      }
+
+      .form-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 23px;
+      }
+
+      #message {
+        font-size: 13px;
+        min-height: 18px;
+        margin-bottom: 0;
+      }
+
+      .success {
+        color: #24945c;
+      }
+
+      .error {
+        color: #df5260;
+      }
+
+      /* Student table */
+      .table-tools {
+        margin-bottom: 22px;
+      }
+
+      .table-tools input {
+        max-width: 380px;
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+      }
+
+      th {
+        background: #fafaff;
+        color: #8b8fa4;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      td,
+      th {
+        padding: 17px 13px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      td {
+        font-size: 13px;
+      }
+
+      .student-name {
+        font-weight: 700;
+      }
+
+      .department-tag {
+        display: inline-block;
+        background: var(--purple-light);
+        color: var(--purple);
+        border-radius: 20px;
+        padding: 7px 11px;
+        font-size: 11px;
+        font-weight: 700;
+      }
+
+      .action-buttons {
+        display: flex;
+        gap: 7px;
+      }
+
+      .edit-btn {
+        background: #fff2e4;
+        color: #d38a35;
+      }
+
+      .delete-btn {
+        background: #ffebee;
+        color: #df5260;
+      }
+
+      .empty {
+        text-align: center;
+        color: var(--muted);
+        padding: 45px;
+      }
+
+      footer {
+        text-align: center;
+        color: var(--muted);
+        font-size: 12px;
+        padding: 20px;
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+
+      @media (max-width: 850px) {
+        .sidebar {
+          display: none;
+        }
+
+        .content {
+          padding: 20px;
+        }
+
+        .topbar {
+          padding: 18px 20px;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .stats,
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .welcome h1 {
+          font-size: 23px;
+        }
+
+        .panel {
+          padding: 18px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="app">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-icon">A</div>
+          Atlas<span style="color: #7456e8">.</span>
+        </div>
+
+        <p class="nav-label">WORKSPACE</p>
+
+        <div class="nav-item active">◈ &nbsp; Dashboard</div>
+
+        <div class="nav-item">♙ &nbsp; Students</div>
+
+        <div class="nav-item">▤ &nbsp; Records</div>
+
+        <div class="sidebar-note">
+          <strong>Student Records System</strong>
+          <p>A student management project demonstrating CRUD operations.</p>
+          <strong>Web Demo · v1.0</strong>
+        </div>
+      </aside>
+
+      <!-- Main -->
+      <div class="main">
+        <header class="topbar">
+          <strong>Student Management / Dashboard</strong>
+          <div class="avatar">A</div>
+        </header>
+
+        <div class="content">
+          <div class="welcome">
+            <div>
+              <h1>Student Dashboard ✨</h1>
+              <p>Manage your students and academic records.</p>
+            </div>
+
+            <span class="badge">● System Ready</span>
+          </div>
+
+          <!-- Statistics -->
+          <section class="stats">
+            <div class="stat-card">
+              <div class="stat-icon lavender">🎓</div>
+              <p>Total Students</p>
+              <h2 id="totalStudents">0</h2>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon peach">⭐</div>
+              <p>Average GPA</p>
+              <h2 id="averageGpa">0.00</h2>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon mint">📚</div>
+              <p>Departments</p>
+              <h2 id="departmentCount">0</h2>
+            </div>
+          </section>
+
+          <!-- Student form -->
+          <section class="panel">
+            <div class="panel-heading">
+              <h2 id="formTitle">Add New Student</h2>
+              <span>Student Information</span>
+            </div>
+
+            <form id="studentForm">
+              <div class="form-grid">
+                <div>
+                  <label for="studentId">STUDENT ID</label>
+                  <input
+                    id="studentId"
+                    type="number"
+                    min="1"
+                    step="1"
+                    placeholder="e.g. 1001"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label for="fullName">FULL NAME</label>
+                  <input
+                    id="fullName"
+                    type="text"
+                    placeholder="Enter full name"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label for="age">AGE</label>
+                  <input
+                    id="age"
+                    type="number"
+                    min="16"
+                    max="100"
+                    step="1"
+                    placeholder="e.g. 21"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label for="department">DEPARTMENT</label>
+                  <input
+                    id="department"
+                    type="text"
+                    placeholder="e.g. Software Engineering"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label for="gpa">GPA</label>
+                  <input
+                    id="gpa"
+                    type="number"
+                    min="0"
+                    max="4"
+                    step="0.01"
+                    placeholder="0.00 - 4.00"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="primary" id="saveButton">
+                  + Add Student
+                </button>
+
+                <button
+                  type="button"
+                  class="secondary"
+                  id="cancelButton"
+                  hidden
+                >
+                  Cancel
+                </button>
+              </div>
+
+              <p id="message" role="status"></p>
+            </form>
+          </section>
+
+          <!-- Student list -->
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>Student Directory</h2>
+              <span id="recordCount">0 records</span>
+            </div>
+
+            <div class="table-tools">
+              <input
+                type="search"
+                id="searchInput"
+                placeholder="🔍 Search students..."
+              />
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Student Name</th>
+                    <th>Age</th>
+                    <th>Department</th>
+                    <th>GPA</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+
+                <tbody id="studentTable"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <footer>
+            Atlas Student Records System · Algorithms & Data Structures Project
+          </footer>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // C# API baglantisi
+      const API_URL = "http://localhost:5050/api/students";
+
+      let students = [];
+      let editingId = null;
+
+      const form = document.getElementById("studentForm");
+      const table = document.getElementById("studentTable");
+      const message = document.getElementById("message");
+
+      const idInput = document.getElementById("studentId");
+      const nameInput = document.getElementById("fullName");
+      const ageInput = document.getElementById("age");
+      const departmentInput = document.getElementById("department");
+      const gpaInput = document.getElementById("gpa");
+
+      const searchInput = document.getElementById("searchInput");
+      const cancelButton = document.getElementById("cancelButton");
+      const saveButton = document.getElementById("saveButton");
+
+      // Mesaj goster
+      function showMessage(text, error = false) {
+        message.textContent = text;
+        message.className = error ? "error" : "success";
+      }
+
+      // Formu temizle
+      function resetForm() {
+        form.reset();
+        editingId = null;
+        idInput.disabled = false;
+
+        document.getElementById("formTitle").textContent = "Add New Student";
+
+        saveButton.textContent = "+ Add Student";
+        cancelButton.hidden = true;
+      }
+
+      // API hatasini oku
+      async function readError(response) {
+        const text = await response.text();
+
+        try {
+          const data = JSON.parse(text);
+          return data.message || data.title || text;
+        } catch {
+          return text || "Request failed";
+        }
+      }
+
+      // C# Linked List'ten ogrencileri getir
+      async function loadStudents() {
+        try {
+          const response = await fetch(API_URL);
+
+          if (!response.ok) {
+            throw new Error(await readError(response));
+          }
+
+          students = await response.json();
+          displayStudents();
+          return true;
+        } catch (error) {
+          console.error(error);
+          showMessage("Cannot connect to C# API!", true);
+          return false;
+        }
+      }
+
+      // Ogrenci ekle veya guncelle
+      form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const student = {
+          studentId: Number(idInput.value),
+          fullName: nameInput.value.trim(),
+          age: Number(ageInput.value),
+          department: departmentInput.value.trim(),
+          gpa: Number(gpaInput.value),
+        };
+
+        // Bilgileri kontrol et
+        if (!Number.isInteger(student.studentId) || student.studentId <= 0) {
+          showMessage("Invalid Student ID!", true);
+          return;
+        }
+
+        if (!student.fullName || !student.department) {
+          showMessage("Name and department are required!", true);
+          return;
+        }
+
+        if (
+          !Number.isInteger(student.age) ||
+          student.age < 16 ||
+          student.age > 100
+        ) {
+          showMessage("Invalid age!", true);
+          return;
+        }
+
+        if (
+          !Number.isFinite(student.gpa) ||
+          student.gpa < 0 ||
+          student.gpa > 4
+        ) {
+          showMessage("Invalid GPA!", true);
+          return;
+        }
+
+        const isEditing = editingId !== null;
+
+        const url = isEditing ? `${API_URL}/${editingId}` : API_URL;
+
+        const method = isEditing ? "PUT" : "POST";
+
+        saveButton.disabled = true;
+
+        try {
+          const response = await fetch(url, {
+            method: method,
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(student),
+          });
+
+          if (!response.ok) {
+            throw new Error(await readError(response));
+          }
+
+          resetForm();
+
+          const loaded = await loadStudents();
+
+          if (loaded) {
+            showMessage(
+              isEditing
+                ? "Student updated successfully in C#!"
+                : "Student added to C# Linked List!"
+            );
+          }
+        } catch (error) {
+          console.error(error);
+          showMessage(error.message, true);
+        } finally {
+          saveButton.disabled = false;
+        }
+      });
+
+      // Ogrenci duzenle
+      function editStudent(id) {
+        const student = students.find((s) => s.studentId === id);
+
+        if (!student) {
+          showMessage("Student not found!", true);
+          return;
+        }
+
+        editingId = id;
+
+        idInput.value = student.studentId;
+        nameInput.value = student.fullName;
+        ageInput.value = student.age;
+        departmentInput.value = student.department;
+        gpaInput.value = student.gpa;
+
+        idInput.disabled = true;
+
+        document.getElementById("formTitle").textContent = "Update Student";
+
+        saveButton.textContent = "Save Changes";
+        cancelButton.hidden = false;
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+
+      // Ogrenci sil
+      async function deleteStudent(id) {
+        if (!confirm("Delete this student?")) return;
+
+        try {
+          const response = await fetch(`${API_URL}/${id}`, {
+            method: "DELETE",
+          });
+
+          if (!response.ok) {
+            throw new Error(await readError(response));
+          }
+
+          if (editingId === id) {
+            resetForm();
+          }
+
+          const loaded = await loadStudents();
+
+          if (loaded) {
+            showMessage("Student deleted successfully!");
+          }
+        } catch (error) {
+          console.error(error);
+          showMessage(error.message, true);
+        }
+      }
+
+      // Ogrencileri tabloda goster
+      function displayStudents() {
+        const search = searchInput.value.toLowerCase().trim();
+
+        const filtered = students.filter(
+          (student) =>
+            String(student.studentId).includes(search) ||
+            student.fullName.toLowerCase().includes(search) ||
+            student.department.toLowerCase().includes(search)
+        );
+
+        table.replaceChildren();
+
+        if (filtered.length === 0) {
+          const row = document.createElement("tr");
+          const cell = document.createElement("td");
+
+          cell.colSpan = 6;
+          cell.className = "empty";
+          cell.textContent = "No students found";
+
+          row.appendChild(cell);
+          table.appendChild(row);
+        }
+
+        filtered.forEach((student) => {
+          const row = document.createElement("tr");
+
+          const idCell = document.createElement("td");
+          idCell.textContent = "#" + student.studentId;
+
+          const nameCell = document.createElement("td");
+          nameCell.textContent = student.fullName;
+          nameCell.className = "student-name";
+
+          const ageCell = document.createElement("td");
+          ageCell.textContent = student.age;
+
+          const departmentCell = document.createElement("td");
+          const tag = document.createElement("span");
+          tag.className = "department-tag";
+          tag.textContent = student.department;
+          departmentCell.appendChild(tag);
+
+          const gpaCell = document.createElement("td");
+          gpaCell.textContent = student.gpa.toFixed(2);
+
+          const actionsCell = document.createElement("td");
+          const actions = document.createElement("div");
+          actions.className = "action-buttons";
+
+          const editButton = document.createElement("button");
+          editButton.className = "edit-btn";
+          editButton.textContent = "Edit";
+          editButton.onclick = () => editStudent(student.studentId);
+
+          const deleteButton = document.createElement("button");
+          deleteButton.className = "delete-btn";
+          deleteButton.textContent = "Delete";
+          deleteButton.onclick = () => deleteStudent(student.studentId);
+
+          actions.append(editButton, deleteButton);
+          actionsCell.appendChild(actions);
+
+          row.append(
+            idCell,
+            nameCell,
+            ageCell,
+            departmentCell,
+            gpaCell,
+            actionsCell
+          );
+
+          table.appendChild(row);
+        });
+
+        // Dashboard istatistikleri
+        document.getElementById("totalStudents").textContent = students.length;
+
+        const average = students.length
+          ? students.reduce((sum, s) => sum + s.gpa, 0) / students.length
+          : 0;
+
+        document.getElementById("averageGpa").textContent = average.toFixed(2);
+
+        const departments = new Set(
+          students.map((s) => s.department.toLowerCase())
+        );
+
+        document.getElementById("departmentCount").textContent =
+          departments.size;
+
+        document.getElementById("recordCount").textContent =
+          filtered.length + " records";
+      }
+
+      // Arama
+      searchInput.addEventListener("input", displayStudents);
+
+      // Iptal
+      cancelButton.addEventListener("click", function () {
+        resetForm();
+        showMessage("");
+      });
+
+      // Sayfa acilinca ogrencileri yukle
+      loadStudents();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+/Users/cansufindik/Desktop/AlgorithmsCaseStudy/StudentRecordsSystem/bin/Debug/net10.0/StudentRecordsSystem
+/Users/cansufindik/Desktop/AlgorithmsCaseStudy/StudentRecordsSystem/bin/Debug/net10.0/StudentRecordsSystem.deps.json
+/Users/cansufindik/Desktop/AlgorithmsCaseStudy/StudentRecordsSystem/bin/Debug/net10.0/StudentRecordsSystem.runtimeconfig.json
+/Users/cansufindik/Desktop/AlgorithmsCaseStudy/StudentRecordsSystem/bin/Debug/net10.0/StudentRecordsSystem.dll
+/Users/cansufindik/Desktop/AlgorithmsCaseStudy/StudentRecordsSystem/bin/Debug/net10.0/StudentRecordsSystem.pdb
+/Users/cansufindik/Desktop/AlgorithmsCaseStudy/StudentRecordsSystem/obj/Debug/net10.0/StudentRecordsSystem.GeneratedMSBuildEditorConfig.editorconfig
+/Users/cansufindik/Desktop/AlgorithmsCaseStudy/StudentRecordsSystem/obj/Debug/net10.0/StudentRecordsSystem.AssemblyInfoInputs.cache
+/Users/cansufindik/Desktop/AlgorithmsCaseStudy/StudentRecordsSystem/obj/Debug/net10.0/StudentRecordsSystem.AssemblyInfo.cs
+/Users/cansufindik/Desktop/AlgorithmsCaseStudy/StudentRecordsSystem/obj/Debug/net10.0/StudentRecordsSystem.csproj.CoreCompileInputs.cache
+/Users/cansufindik/Desktop/AlgorithmsCaseStudy/StudentRecordsSystem/obj/Debug/net10.0/StudentRecordsSystem.dll
+/Users/cansufindik/Desktop/AlgorithmsCaseStudy/StudentRecordsSystem/obj/Debug/net10.0/refint/StudentRecordsSystem.dll
+/Users/cansufindik/Desktop/AlgorithmsCaseStudy/StudentRecordsSystem/obj/Debug/net10.0/StudentRecordsSystem.pdb
+/Users/cansufindik/Desktop/AlgorithmsCaseStudy/StudentRecordsSystem/obj/Debug/net10.0/StudentRecordsSystem.genruntimeconfig.cache
+/Users/cansufindik/Desktop/AlgorithmsCaseStudy/StudentRecordsSystem/obj/Debug/net10.0/ref/StudentRecordsSystem.dll
