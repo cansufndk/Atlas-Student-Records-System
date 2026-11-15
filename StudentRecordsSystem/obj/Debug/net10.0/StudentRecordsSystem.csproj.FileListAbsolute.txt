@@ -12,3 +12,4 @@
 /Users/cansufindik/Desktop/AlgorithmsCaseStudy/StudentRecordsSystem/obj/Debug/net10.0/StudentRecordsSystem.pdb
 /Users/cansufindik/Desktop/AlgorithmsCaseStudy/StudentRecordsSystem/obj/Debug/net10.0/StudentRecordsSystem.genruntimeconfig.cache
 /Users/cansufindik/Desktop/AlgorithmsCaseStudy/StudentRecordsSystem/obj/Debug/net10.0/ref/StudentRecordsSystem.dll
+/Users/cansufindik/Desktop/AlgorithmsCaseStudy/StudentRecordsSystem/obj/Debug/net10.0/StudentRecordsSystem.sourcelink.json
